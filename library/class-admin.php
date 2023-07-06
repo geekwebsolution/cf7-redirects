@@ -41,27 +41,19 @@ class cf7rgk_redirect_admin {
 					<input type="text"  placeholder="External URL" name="cf7rgk-redirect-external" value="<?php if(isset($cf7rgk_redirect_external) && !empty($cf7rgk_redirect_external)){ if($cf7rgk_redirect_external){ echo $cf7rgk_redirect_external; } } ?>">
 				</span>
 				<div class="field-notice field-notice-alert field-notice-hidden cf7rgk_redirect_external" style="display:none;">
-					<strong>
-						Notice!        
-					</strong>
-					URL Not Valid
+					<strong>Notice!</strong> URL Not Valid
 				</div>
 			</div>	
 			<div class="cf7rgk-inner-input cf7rgk-page" <?php if(isset($cf7rgk_url) && !empty($cf7rgk_url)){ if($cf7rgk_url=="url_external"){ echo 'style="display:none;"'; } } ?>>	
-				
 				<span class="cf7rgk-fildes">
-						<?php	
-						$pages = get_pages(); 
-						?>
-						<select name="cf7rgk-redirect-page" id="cf7rgk-redirect-page">
-							<option value="0">Choose Page</option>
-							<?php 
-							if(isset($pages) && !empty($pages)){
-								foreach ($pages as $page_data) { ?>
-								<option value="<?php  echo $page_data->ID;?>" <?php if(isset($cf7rgk_redirect_page) && !empty($cf7rgk_redirect_page)){ if($cf7rgk_redirect_page==$page_data->ID){ echo 'selected="selected"'; } } ?>><?php echo $page_data->post_title.'(id#'.$page_data->ID.')';?></option>
-							<?php }
-							} ?>
-						 </select>
+					<select name="cf7rgk-redirect-page" id="cf7rgk-redirect-page">
+						<option value="0">Choose Page</option>
+						<?php 
+						if(isset($cf7rgk_redirect_page) && !empty($cf7rgk_redirect_page)){?>
+							<option selected="selected" value="<?php echo $cf7rgk_redirect_page ; ?>"><?php echo get_the_title( $cf7rgk_redirect_page ).' (id#'.$cf7rgk_redirect_page.')'; ?></option>
+							<?php
+						}?>
+					</select>
 				</span>	
 			</div>
 			<div class="cf7rgk-inner-input cf7rgk-post" <?php if(isset($cf7rgk_url) && !empty($cf7rgk_url)){ if($cf7rgk_url=="url_external"){ echo 'style="display:none;"'; } } ?>>		
@@ -69,13 +61,11 @@ class cf7rgk_redirect_admin {
 				<span class="cf7rgk-fildes">
 					<select name="cf7rgk-redirect-post" id="cf7rgk-redirect-post">
 						<option value="0">Choose Post</option>
-						<?php
-						global $post;
-						$args = array( 'numberposts' => -1);
-						$posts = get_posts($args);
-						foreach( $posts as $post ) : setup_postdata($post); ?>
-							<option value="<?php  echo $post->ID; ?>" <?php if(isset($cf7rgk_redirect_post) && !empty($cf7rgk_redirect_post)){ if($cf7rgk_redirect_post==$post->ID){ echo 'selected="selected"'; } } ?>><?php echo the_title().'(id#'.$post->ID.')'; ?></option>
-						<?php endforeach; ?>
+						<?php 
+						if(isset($cf7rgk_redirect_post) && !empty($cf7rgk_redirect_post)){?>
+							<option selected="selected" value="<?php echo $cf7rgk_redirect_post ; ?>"><?php echo get_the_title( $cf7rgk_redirect_post ).' (id#'.$cf7rgk_redirect_post.')'; ?></option>
+							<?php
+						}?>
 					</select>
 				</span>
 			</div>
@@ -83,10 +73,7 @@ class cf7rgk_redirect_admin {
 				<input type="checkbox" id="cf7rgk_open_image_in_new_tab" name="cf7rgk-redirect-open-new-tab" <?php if(isset($cf7rgk_redirect_open_new_tab) && !empty($cf7rgk_redirect_open_new_tab)){ if($cf7rgk_redirect_open_new_tab=="on"){ echo "checked"; } } ?>>
 				<label for="cf7rgk_open_image_in_new_tab">Open page in a new tab</label>
 				<div class="field-notice field-notice-alert field-notice-hidden" style="display:none;">
-					<strong>
-						Notice!        
-					</strong>
-					This option might not work as expected, since browsers often block popup windows. This option depends on the browser settings.
+					<strong>Notice! </strong> This option might not work as expected, since browsers often block popup windows. This option depends on the browser settings.
 				</div>
 			</div>
 			<div class="cf7rgk-inner-input cf7rgk-checkbox">
@@ -118,24 +105,23 @@ class cf7rgk_redirect_admin {
 					</strong>
 					Do not include <code>&lt;script&gt;</code> tags. If you will add script then Redirection will be stop.
 			</div>	
-		 </div>
-<?php
+		</div>
+		<?php
 	}
 	
 	static function wpcf7r_save_redirect_url($contact_form) {
 		
 		$cf7rgk_redirect_open_new_tab = $cf7rgk_redirect_http_build_query = $selectively_fields = "";
 		$form_id = $contact_form->id();
+		echo '<pre>'; print_r($form_id  ); echo '</pre>';
 		if(isset($_POST['cf7rgk_url']))							$cf7rgk_url=sanitize_text_field($_POST['cf7rgk_url']);
 		if(isset($_POST['cf7rgk-redirect-external']))			$cf7rgk_redirect_external=sanitize_text_field($_POST['cf7rgk-redirect-external']);
 		if(isset($_POST['cf7rgk-redirect-page']))				$cf7rgk_redirect_page=sanitize_text_field($_POST['cf7rgk-redirect-page']);
 		if(isset($_POST['cf7rgk-redirect-post']))				$cf7rgk_redirect_post=sanitize_text_field($_POST['cf7rgk-redirect-post']);
 		if(isset($_POST['cf7rgk-redirect-open-new-tab'])) 		$cf7rgk_redirect_open_new_tab=sanitize_text_field($_POST['cf7rgk-redirect-open-new-tab']);
 		if(isset($_POST['cf7rgk-redirect-http-build-query'])) 	$cf7rgk_redirect_http_build_query=sanitize_text_field($_POST['cf7rgk-redirect-http-build-query']);
-		if(isset($_POST['cf7rgk-redirect-http-build-query-selectively'])) 
-			$selectively_fields=sanitize_text_field($_POST['cf7rgk-redirect-http-build-query-selectively']);
-		if(isset($_POST['cf7rgk-redirect-after_sent_script']))
-			$cf7rgk_redirect_after_sent_script=sanitize_text_field($_POST['cf7rgk-redirect-after_sent_script']);
+		if(isset($_POST['cf7rgk-redirect-http-build-query-selectively'])) $selectively_fields=sanitize_text_field($_POST['cf7rgk-redirect-http-build-query-selectively']);
+		if(isset($_POST['cf7rgk-redirect-after_sent_script'])) $cf7rgk_redirect_after_sent_script=sanitize_text_field($_POST['cf7rgk-redirect-after_sent_script']);
 		if(isset($_POST['cf7rgk-redirect-http_build_query_selectively_fields']))
 			$http_build_query_selectively_fields=sanitize_text_field($_POST['cf7rgk-redirect-http_build_query_selectively_fields']);
 		$cf7rgk['form_id']=$form_id;
@@ -161,17 +147,11 @@ class cf7rgk_redirect_admin {
 		}
 		
 	}
-	static function  cf7rgk_success_option_msg($msg)
-	{
-		
+	static function  cf7rgk_success_option_msg($msg){
 		echo ' <div class="notice notice-success vdgk-success-msg is-dismissible"><p>'. $msg . '</p></div>';		
-		
 	}
-
 	// Error message
-	static function  cf7rgk_failure_option_msg($msg)
-	{ 
+	static function  cf7rgk_failure_option_msg($msg){ 
 		echo  '<div class="notice notice-error  is-dismissible"><p>' . $msg . '</p></div>';
-			
 	}
 }
