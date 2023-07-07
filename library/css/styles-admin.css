@@ -144,10 +144,28 @@ form.vdgk-sticky-video-admin-form select, form.vdgk-sticky-video-admin-form inpu
 	width:100%
 	
 }
-.cf7rgk-inner-input span:not(.cf7rgk-fildes) {
+/* .cf7rgk-inner-input span:not(.cf7rgk-fildes) {
     margin-bottom: 15px;
     display: inline-block;
+} */
+
+.cf7rgk-fildes .select2-selection {
+    height: 42px;
+};
+.wdgk-select-box .select2-container--default .select2-selection--single {
+    height: 42px;
 }
+
+.cf7rgk-fildes .select2-selection .select2-selection__rendered {
+    height: 100%;
+    line-height: 3;
+}
+
+.cf7rgk-fildes .select2-selection .select2-selection__arrow {
+    height: 100%;
+}
+
+.cf7rgk-inner-input .cf7rgk-fildes .select2 {min-width: 300px;}
 
 .cf7rgk-inner-input .cf7rgk-field-message {
     padding-bottom: 15px;

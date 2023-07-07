@@ -103,11 +103,18 @@ class CF7RGK_util {
 		wp_localize_script('my_voter_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ))); 
 	}
 
-    static function cf7rgk_enqueue_admin_scripts() {
-        wp_enqueue_style('cf7rgk_redirect_front_script_admin', plugins_url('css/styles-admin.css', __FILE__), false, CF7RGK_BUILD);
-        wp_enqueue_script('cf7rgk_redirect_front_style_admin', plugins_url('js/scripts-admin.js', __FILE__), false, CF7RGK_BUILD);
+	static function cf7rgk_enqueue_admin_scripts() {
+		// Enqueue admin-end styles
+		wp_enqueue_style("cf7rgk_front_select2", plugins_url('/css/select2.min.css', __FILE__), false, CF7RGK_BUILD);
+		wp_enqueue_style('cf7rgk_redirect_front_script_admin', plugins_url('css/styles-admin.css', __FILE__), array('cf7rgk_front_select2'), CF7RGK_BUILD);
+	
+		// Enqueue admin-end scripts
+		wp_enqueue_script('cf7rgk_select2', plugins_url('/js/select2.min.js', __FILE__), false, CF7RGK_BUILD);
+		wp_enqueue_script('cf7rgk_redirect_front_style_admin', plugins_url('js/scripts-admin.js', __FILE__), array('jquery', 'cf7rgk_select2'), CF7RGK_BUILD);
+	
+		// Localize the admin-end script
+		wp_localize_script('cf7rgk_redirect_front_style_admin', 'cf7rgkobj', array('ajaxurl' => admin_url('admin-ajax.php')));
 	}
-
 
 	static function cf7rgk_ajax_redirect_cf7() {
 		if(isset($_POST['form_id']) && isset($_POST['inputs'])){
