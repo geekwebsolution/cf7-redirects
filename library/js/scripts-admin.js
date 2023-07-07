@@ -75,7 +75,6 @@ jQuery(document).ready(function() {
                         text: item.title + ' (id#'+ item.id + ')'
                     };
                 });
-				console.log(results);
                 return {
                     results: results,
                 };
@@ -126,6 +125,3 @@ jQuery(document).ready(function() {
         }
     });
 });
-
-
-	
