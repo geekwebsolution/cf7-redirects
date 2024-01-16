@@ -42,21 +42,13 @@ class cf7rgk_redirect_admin {
 					<input type="text"  placeholder="External URL" name="cf7rgk-redirect-external" value="<?php if(isset($cf7rgk_redirect_external) && !empty($cf7rgk_redirect_external)){ if($cf7rgk_redirect_external){ echo $cf7rgk_redirect_external; } } ?>">
 				</span>
 				<div class="field-notice field-notice-alert field-notice-hidden cf7rgk_redirect_external" style="display:none;">
-<<<<<<< HEAD
 					<strong><?php echo esc_html( "Notice!", "contact-form-7-redirects" ); ?></strong> <?php echo esc_html( "URL Not Valid", "contact-form-7-redirects" ); ?>
-=======
-					<strong>Notice!</strong> URL Not Valid
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 				</div>
 			</div>	
 			<div class="cf7rgk-inner-input cf7rgk-page" <?php if(isset($cf7rgk_url) && !empty($cf7rgk_url)){ if($cf7rgk_url=="url_external"){ echo 'style="display:none;"'; } } ?>>	
 				<span class="cf7rgk-fildes">
 					<select name="cf7rgk-redirect-page" id="cf7rgk-redirect-page">
-<<<<<<< HEAD
 						<option value="0"><?php echo esc_html( "Choose Page", "contact-form-7-redirects" ); ?></option>
-=======
-						<option value="0">Choose Page</option>
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 						<?php 
 						if(isset($cf7rgk_redirect_page) && !empty($cf7rgk_redirect_page)){?>
 							<option selected="selected" value="<?php echo $cf7rgk_redirect_page ; ?>"><?php echo get_the_title( $cf7rgk_redirect_page ).' (id#'.$cf7rgk_redirect_page.')'; ?></option>
@@ -69,11 +61,7 @@ class cf7rgk_redirect_admin {
 				
 				<span class="cf7rgk-fildes">
 					<select name="cf7rgk-redirect-post" id="cf7rgk-redirect-post">
-<<<<<<< HEAD
 						<option value="0"><?php echo esc_html( "Choose Post", "contact-form-7-redirects" ); ?></option>
-=======
-						<option value="0">Choose Post</option>
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 						<?php 
 						if(isset($cf7rgk_redirect_post) && !empty($cf7rgk_redirect_post)){?>
 							<option selected="selected" value="<?php echo $cf7rgk_redirect_post ; ?>"><?php echo get_the_title( $cf7rgk_redirect_post ).' (id#'.$cf7rgk_redirect_post.')'; ?></option>
@@ -86,11 +74,7 @@ class cf7rgk_redirect_admin {
 				<input type="checkbox" id="cf7rgk_open_image_in_new_tab" name="cf7rgk-redirect-open-new-tab" <?php if(isset($cf7rgk_redirect_open_new_tab) && !empty($cf7rgk_redirect_open_new_tab)){ if($cf7rgk_redirect_open_new_tab=="on"){ echo "checked"; } } ?>>
 				<label for="cf7rgk_open_image_in_new_tab"><?php echo esc_html( "Open page in a new tab", "contact-form-7-redirects" ); ?></label>
 				<div class="field-notice field-notice-alert field-notice-hidden" style="display:none;">
-<<<<<<< HEAD
 					<strong><?php echo esc_html( "Notice!", "contact-form-7-redirects" ); ?> </strong> <?php echo esc_html( "This option might not work as expected, since browsers often block popup windows. This option depends on the browser settings.", "contact-form-7-redirects" ); ?>
-=======
-					<strong>Notice! </strong> This option might not work as expected, since browsers often block popup windows. This option depends on the browser settings.
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 				</div>
 			</div>
 			<div class="cf7rgk-inner-input cf7rgk-checkbox">
@@ -162,11 +146,7 @@ class cf7rgk_redirect_admin {
 		
 	}
 	static function  cf7rgk_success_option_msg($msg){
-<<<<<<< HEAD
 		echo ' <div class="notice notice-success is-dismissible"><p>'. $msg . '</p></div>';		
-=======
-		echo ' <div class="notice notice-success vdgk-success-msg is-dismissible"><p>'. $msg . '</p></div>';		
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 	}
 	// Error message
 	static function  cf7rgk_failure_option_msg($msg){ 

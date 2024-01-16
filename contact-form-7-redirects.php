@@ -8,42 +8,19 @@
     Text Domain: contact-form-7-redirects
 */
 
-<<<<<<< HEAD
 // do not allow direct access
 if(isset($_SERVER['SCRIPT_NAME'])) {
     if (strpos(strtolower($_SERVER['SCRIPT_NAME']), strtolower(basename(__FILE__)))) {
         header('HTTP/1.0 403 Forbidden');
         exit('Forbidden');
     }
-=======
-Description:  Contact Form 7 Redirection after mail sent.
-
-Author: Geek Code Lab
-
-Version: 1.6
-
-Author URI: https://geekcodelab.com/
- */
-
-//do not allow direct access
-if (strpos(strtolower($_SERVER['SCRIPT_NAME']), strtolower(basename(__FILE__)))) {
-    header('HTTP/1.0 403 Forbidden');
-    exit('Forbidden');
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 }
 
 /**
  * Global vars
  */
 
-<<<<<<< HEAD
 define('CF7RGK_BUILD', '1.7');  // Used to force load of latest .js files
-=======
-
-// ********** Be sure to use "Match case," and do UPPER and lower case seperately ****************
-
-define('CF7RGK_BUILD', '1.6');  // Used to force load of latest .js files
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 define('CF7RGK_FILE', __FILE__); // For use in other files
 define('CF7RGK_PATH', plugin_dir_path(__FILE__));
 define('CF7RGK_URL', plugin_dir_url(__FILE__));
@@ -102,15 +79,9 @@ function cf7rgk_add_plugin_settings_link( $links ) {
 	return $links;
 }
 
-<<<<<<< HEAD
 /**
  * Ajax for search page list
  */
-=======
-
-
-// Register AJAX actions for logged-in and non-logged-in users
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 add_action('wp_ajax_cf7rgk_redirect_page_ajax', 'cf7rgk_redirect_page_ajax_callback');
 add_action('wp_ajax_nopriv_cf7rgk_redirect_page_ajax', 'cf7rgk_redirect_page_ajax_callback');
 
@@ -118,11 +89,7 @@ add_action('wp_ajax_nopriv_cf7rgk_redirect_page_ajax', 'cf7rgk_redirect_page_aja
 function cf7rgk_redirect_page_ajax_callback()
 {
     $result = array();
-<<<<<<< HEAD
     $search = $_POST['search'];
-=======
-    $search = $_POST['search']; // Get the search term from the AJAX request
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 
     $args = array(
         'post_type'      => 'page',
@@ -151,7 +118,6 @@ function cf7rgk_redirect_page_ajax_callback()
         );
     }
 
-<<<<<<< HEAD
     echo json_encode($result);
 
     wp_die();
@@ -160,15 +126,6 @@ function cf7rgk_redirect_page_ajax_callback()
 /**
  * Ajax for search post list
  */
-=======
-    // Encode the result array as JSON and send the response
-    echo json_encode($result);
-
-    wp_die(); // Terminate the script execution
-}
-
-// Register AJAX actions for logged-in and non-logged-in users
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 add_action('wp_ajax_cf7rgk_redirect_post_ajax', 'cf7rgk_redirect_post_ajax_callback');
 add_action('wp_ajax_nopriv_cf7rgk_redirect_post_ajax', 'cf7rgk_redirect_post_ajax_callback');
 
@@ -176,11 +133,7 @@ add_action('wp_ajax_nopriv_cf7rgk_redirect_post_ajax', 'cf7rgk_redirect_post_aja
 function cf7rgk_redirect_post_ajax_callback()
 {
     $result = array();
-<<<<<<< HEAD
     $search = $_POST['search'];
-=======
-    $search = $_POST['search']; // Get the search term from the AJAX request
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 
     $args = array(
         'post_type'      => 'post',
@@ -210,15 +163,7 @@ function cf7rgk_redirect_post_ajax_callback()
         );
     }
 
-<<<<<<< HEAD
     echo json_encode($result);
 
     wp_die();
 }
-=======
-    // Encode the result array as JSON and send the response
-    echo json_encode($result);
-
-    wp_die(); // Terminate the script execution
-}
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7

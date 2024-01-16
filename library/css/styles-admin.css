@@ -18,43 +18,11 @@
 .cf7rgk_setting [type='text']
 {
 	height: 32px;
-<<<<<<< HEAD
 	width:100%;
 }
 
 .cf7rgk-fildes .select2-selection {
     height: 42px;
-=======
-	width:100%
-	
-}
-/* .cf7rgk-inner-input span:not(.cf7rgk-fildes) {
-    margin-bottom: 15px;
-    display: inline-block;
-} */
-
-.cf7rgk-fildes .select2-selection {
-    height: 42px;
-};
-.wdgk-select-box .select2-container--default .select2-selection--single {
-    height: 42px;
-}
-
-.cf7rgk-fildes .select2-selection .select2-selection__rendered {
-    height: 100%;
-    line-height: 3;
-}
-
-.cf7rgk-fildes .select2-selection .select2-selection__arrow {
-    height: 100%;
-}
-
-.cf7rgk-inner-input .cf7rgk-fildes .select2 {min-width: 300px;}
-
-.cf7rgk-inner-input .cf7rgk-field-message {
-    padding-bottom: 15px;
-    padding-top: 10px;
->>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 }
 
 .cf7rgk-fildes .select2-selection .select2-selection__rendered {
