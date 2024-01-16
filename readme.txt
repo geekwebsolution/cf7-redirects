@@ -4,8 +4,13 @@ Donate link: https://paypal.me/rvadhel
 Tags:contact form 7 redirect, contact form 7 thank you page, redirect cf7, redirect contact form 7
 Requires PHP: 5.2.4
 Requires at least: 3.0.1
+<<<<<<< HEAD
+Tested up to: 6.4.1
+Stable tag: 1.7
+=======
 Tested up to: 6.2.2
 Stable tag: 1.6
+>>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
 
 This Plugin provide you redirect option after Contact form 7 sent successfully.
 
@@ -51,8 +56,17 @@ After Plugin Active go to Contact Forms-> Redirect Settings.
 
 == Changelog ==
 
+<<<<<<< HEAD
+= 1.7 =
+ Fixed bugs.
+ Tested with current contact form 7 version 
+
+= 1.6 =
+ Updated select2 on post and page dropwon
+=======
 = 1.6 =
 updated select2 on post and page dropwon
+>>>>>>> 0f65a109755e698f93d1b6c4a80fd2b5acd0bcf7
  
 = 1.5 =
  Tested up to wp version 6.2.2
