@@ -33,7 +33,7 @@ add_action( 'admin_init', 'cf7rgk_plugin_load' );
 function cf7rgk_plugin_load(){
 	if ( ! ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) ) {
 		add_action( 'admin_notices', 'cf7rgk_install_contact_form_7_admin_notice' );
-		deactivate_plugins("contact-form-7-redirects/contact-form-7-redirects.php");
+		deactivate_plugins("cf7-redirects/contact-form-7-redirects.php");
 		return;
 	}
 }
