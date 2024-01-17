@@ -1,69 +1,87 @@
 <?php
 /*
-Plugin Name: Contact Form 7 Redirects
+    Plugin Name: Contact Form 7 Redirects
+    Description:  Contact Form 7 Redirection after mail sent.
+    Author: Geek Code Lab
+    Version: 1.7
+    Author URI: https://geekcodelab.com/
+    Text Domain: contact-form-7-redirects
+*/
 
-Description:  Contact Form 7 Redirection after mail sent.
-
-Author: Geek Code Lab
-
-Version: 1.6
-
-Author URI: https://geekcodelab.com/
- */
-
-//do not allow direct access
-if (strpos(strtolower($_SERVER['SCRIPT_NAME']), strtolower(basename(__FILE__)))) {
-    header('HTTP/1.0 403 Forbidden');
-    exit('Forbidden');
+// do not allow direct access
+if(isset($_SERVER['SCRIPT_NAME'])) {
+    if (strpos(strtolower($_SERVER['SCRIPT_NAME']), strtolower(basename(__FILE__)))) {
+        header('HTTP/1.0 403 Forbidden');
+        exit('Forbidden');
+    }
 }
 
-/* * ******************
- * Global constants
- * ****************** */
+/**
+ * Global vars
+ */
 
-
-// ********** Be sure to use "Match case," and do UPPER and lower case seperately ****************
-
-define('CF7RGK_BUILD', '1.6');  // Used to force load of latest .js files
+define('CF7RGK_BUILD', '1.7');  // Used to force load of latest .js files
 define('CF7RGK_FILE', __FILE__); // For use in other files
 define('CF7RGK_PATH', plugin_dir_path(__FILE__));
 define('CF7RGK_URL', plugin_dir_url(__FILE__));
 
-register_activation_hook( __FILE__, 'cf7rgk_plugin_activate' );
-function cf7rgk_plugin_activate() {
+/**
+ * Admin notice
+ */
+add_action( 'admin_init', 'cf7rgk_plugin_load' );
+
+function cf7rgk_plugin_load(){
 	if ( ! ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) ) {
-		die( '<b>Contact Form 7 Redirects</b> plugin is deactivated because it require <b>Contact Form 7</b> plugin installed and activated.' );
+		add_action( 'admin_notices', 'cf7rgk_install_contact_form_7_admin_notice' );
+		deactivate_plugins("cf7-redirects/contact-form-7-redirects.php");
+		return;
 	}
 }
 
+function cf7rgk_install_contact_form_7_admin_notice(){ ?>
+	<div class="error">
+		<p>
+			<?php
+			// translators: %s is the plugin name.
+			echo esc_html( sprintf( __( '%s is enabled but not effective. It requires Contact Form 7 in order to work.', 'Contact Form 7 Redirects' ), 'contact-form-7-redirects' ) );
+			?>
+		</p>
+	</div>
+	<?php
+}
 
 
-/* * ******************
- * Includes
- * ****************** */
-//function to run on activation 
- 
-require_once CF7RGK_PATH . 'library/class-util.php';
+/**
+ * Includes files
+ */
 
 if ( is_admin() ) {
     require_once CF7RGK_PATH . 'library/class-admin.php';
 }
-//  Initialize plugin settings and hooks ... 
+require_once CF7RGK_PATH . 'library/class-util.php';
+
+
+/**
+ * Initialize plugin links
+ */
 $plugin = plugin_basename( __FILE__ );
 CF7RGK_util::CF7RGK_setup();
 
 $plugin = plugin_basename(__FILE__);
 add_filter( "plugin_action_links_$plugin", 'cf7rgk_add_plugin_settings_link');
 function cf7rgk_add_plugin_settings_link( $links ) {
-	$support_link = '<a href="https://geekcodelab.com/contact/" style="color:#46b450;font-weight: 600;" target="_blank" >' . __( 'Support' ) . '</a>'; 
+	$support_link = '<a href="https://geekcodelab.com/contact/" style="color:#46b450;font-weight: 600;" target="_blank" >' . __( 'Support', 'contact-form-7-redirects' ) . '</a>'; 
 	array_unshift( $links, $support_link );
+
+    $setting_link = '<a href="'. admin_url('admin.php?page=wpcf7') .'">' . __( 'Settings', 'contact-form-7-redirects' ) . '</a>';
+	array_unshift( $links, $setting_link );
 
 	return $links;
 }
 
-
-
-// Register AJAX actions for logged-in and non-logged-in users
+/**
+ * Ajax for search page list
+ */
 add_action('wp_ajax_cf7rgk_redirect_page_ajax', 'cf7rgk_redirect_page_ajax_callback');
 add_action('wp_ajax_nopriv_cf7rgk_redirect_page_ajax', 'cf7rgk_redirect_page_ajax_callback');
 
@@ -71,7 +89,7 @@ add_action('wp_ajax_nopriv_cf7rgk_redirect_page_ajax', 'cf7rgk_redirect_page_aja
 function cf7rgk_redirect_page_ajax_callback()
 {
     $result = array();
-    $search = $_POST['search']; // Get the search term from the AJAX request
+    $search = $_POST['search'];
 
     $args = array(
         'post_type'      => 'page',
@@ -100,13 +118,14 @@ function cf7rgk_redirect_page_ajax_callback()
         );
     }
 
-    // Encode the result array as JSON and send the response
     echo json_encode($result);
 
-    wp_die(); // Terminate the script execution
+    wp_die();
 }
 
-// Register AJAX actions for logged-in and non-logged-in users
+/**
+ * Ajax for search post list
+ */
 add_action('wp_ajax_cf7rgk_redirect_post_ajax', 'cf7rgk_redirect_post_ajax_callback');
 add_action('wp_ajax_nopriv_cf7rgk_redirect_post_ajax', 'cf7rgk_redirect_post_ajax_callback');
 
@@ -114,7 +133,7 @@ add_action('wp_ajax_nopriv_cf7rgk_redirect_post_ajax', 'cf7rgk_redirect_post_aja
 function cf7rgk_redirect_post_ajax_callback()
 {
     $result = array();
-    $search = $_POST['search']; // Get the search term from the AJAX request
+    $search = $_POST['search'];
 
     $args = array(
         'post_type'      => 'post',
@@ -144,8 +163,7 @@ function cf7rgk_redirect_post_ajax_callback()
         );
     }
 
-    // Encode the result array as JSON and send the response
     echo json_encode($result);
 
-    wp_die(); // Terminate the script execution
+    wp_die();
 }
