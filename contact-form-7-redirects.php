@@ -70,12 +70,13 @@ CF7RGK_util::CF7RGK_setup();
 $plugin = plugin_basename(__FILE__);
 add_filter( "plugin_action_links_$plugin", 'cf7rgk_add_plugin_settings_link');
 function cf7rgk_add_plugin_settings_link( $links ) {
-	$support_link = '<a href="https://geekcodelab.com/contact/" style="color:#46b450;font-weight: 600;" target="_blank" >' . __( 'Support', 'contact-form-7-redirects' ) . '</a>'; 
-	array_unshift( $links, $support_link );
-
-    $setting_link = '<a href="'. admin_url('admin.php?page=wpcf7') .'">' . __( 'Settings', 'contact-form-7-redirects' ) . '</a>';
-	array_unshift( $links, $setting_link );
-
+	if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
+		$support_link = '<a href="https://geekcodelab.com/contact/" style="color:#46b450;font-weight: 600;" target="_blank" >' . __( 'Support', 'contact-form-7-redirects' ) . '</a>'; 
+		array_unshift( $links, $support_link );
+	
+	    	$setting_link = '<a href="'. admin_url('admin.php?page=wpcf7') .'">' . __( 'Settings', 'contact-form-7-redirects' ) . '</a>';
+		array_unshift( $links, $setting_link );
+	}
 	return $links;
 }
 
