@@ -2,16 +2,16 @@
 Contributors: rajkakadiya, rvadhel
 Donate link: https://paypal.me/rvadhel
 Tags:contact form 7 redirect, contact form 7 thank you page, redirect cf7, redirect contact form 7
-Requires PHP: 5.2.4
+Requires PHP: 8.2.0
 Requires at least: 3.0.1
-Tested up to: 6.4.1
+Tested up to: 6.4.2
 Stable tag: 1.7
 
 This Plugin provide you redirect option after Contact form 7 sent successfully.
 
 == Description ==
 
-This add-on plugin for Contact Form 7 -  Redirect to any page, any post or any custom url with form parameter after sent successfully mail, you can add custom JavaScript.
+This add-on plugin for Contact Form 7 - Redirect to any page, any post or any custom url with form parameter after sent successfully mail, you can add custom JavaScript.
 
 
 == Usage ==
@@ -53,7 +53,7 @@ After Plugin Active go to Contact Forms-> Redirect Settings.
 
 = 1.7 =
  Fixed bugs.
- Tested with current contact form 7 version 
+ Tested with current contact form 7 version.
 
 = 1.6 =
  Updated select2 on post and page dropwon

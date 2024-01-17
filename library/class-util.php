@@ -63,8 +63,7 @@ class CF7RGK_util {
 		document.addEventListener( 'wpcf7mailsent', function( event ) {
 			var cf7rgk_json = getCookie("cf7rgk_options");
     		var cf7rgk_opt = JSON.parse(cf7rgk_json);
-			
-			console.log(cf7rgk_opt);
+
 			if (cf7rgk_opt != '') {
 				if(cf7rgk_opt.url != '') {
 					if (cf7rgk_opt.open_new == "on") {
@@ -104,9 +103,6 @@ class CF7RGK_util {
 	static function fields_response($form_id, $inputs, $specific_fields = array()) {
 		$new_fields = array();
 		if(!$specific_fields)	$specific_fields = array();
-
-		$cf7cw_option = get_option( 'cf7cw_connect_wh_' . $form_id , $default = false );
-		$string = wp_unslash($cf7cw_option['cf7cw_message_body']);
 
 		$ContactForm = WPCF7_ContactForm::get_instance($form_id);
 		$form_fields = $ContactForm->scan_form_tags();
