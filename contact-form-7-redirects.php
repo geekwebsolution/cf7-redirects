@@ -3,7 +3,7 @@
     Plugin Name: Contact Form 7 Redirects
     Description:  Contact Form 7 Redirection after mail sent.
     Author: Geek Code Lab
-    Version: 1.7
+    Version: 1.8
     Author URI: https://geekcodelab.com/
     Text Domain: contact-form-7-redirects
 */
@@ -20,7 +20,7 @@ if(isset($_SERVER['SCRIPT_NAME'])) {
  * Global vars
  */
 
-define('CF7RGK_BUILD', '1.7');  // Used to force load of latest .js files
+define('CF7RGK_BUILD', '1.8');  // Used to force load of latest .js files
 define('CF7RGK_FILE', __FILE__); // For use in other files
 define('CF7RGK_PATH', plugin_dir_path(__FILE__));
 define('CF7RGK_URL', plugin_dir_url(__FILE__));
