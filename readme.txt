@@ -2,7 +2,7 @@
 Contributors: rajkakadiya, rvadhel
 Donate link: https://paypal.me/rvadhel
 Tags:contact form 7 redirect, contact form 7 thank you page, redirect cf7, redirect contact form 7
-Requires PHP: 8.2.0
+Requires PHP: 7.4
 Requires at least: 3.0.1
 Tested up to: 6.4.2
 Stable tag: 1.7
