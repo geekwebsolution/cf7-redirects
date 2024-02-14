@@ -5,7 +5,7 @@ Tags:contact form 7 redirect, contact form 7 thank you page, redirect cf7, redir
 Requires PHP: 7.4
 Requires at least: 3.0.1
 Tested up to: 6.4.2
-Stable tag: 1.7
+Stable tag: 1.8
 
 This Plugin provide you redirect option after Contact form 7 sent successfully.
 
@@ -50,6 +50,8 @@ After Plugin Active go to Contact Forms-> Redirect Settings.
 == Changelog ==
 
 == Changelog ==
+= 1.8 =
+ Fixed require at least PHP version to 7.4
 
 = 1.7 =
  Fixed bugs.
