@@ -8,7 +8,7 @@ class cf7rgk_redirect_admin {
 	static $options;
 	
 	static function redirect_add_tab( $panels ) {
-		$panels['redirect-pane'] = array(
+		$panels['cf7rgk-redirect-pane'] = array(
 			'title'     => __( 'Redirect Settings', 'contact-form-7-redirects' ),
 			'callback'  => array( 'cf7rgk_redirect_admin', 'create_tab_elements' ) ,
 		);
@@ -89,7 +89,8 @@ class cf7rgk_redirect_admin {
 					<?php echo esc_html( "Pass specific fields from the form as URL query parameters", "contact-form-7-redirects" ); ?>
 				</label>
 				<?php if(isset($selectively_fields) && !empty($selectively_fields)){ if($selectively_fields=="on"){ ?> <script>jQuery(document).ready(function () { jQuery(".cf7rgk-redirect-http-fields-hidden").show(); });</script> <?php } } ?>
-				<span class="cf7rgk-fields cf7rgk-redirect-http-fields-hidden" style="display:none;">	
+				<span class="cf7rgk-fields cf7rgk-redirect-http-fields-hidden" style="display:none;">
+					<div class="cf7rgk-tags"><?php $post->suggest_mail_tags(); ?></div>
 					<input type="text" id="cf7rgk-redirect-http-build-query-selectively-fields" class="field-hidden" placeholder="Fields to pass, separated by commas" name="cf7rgk-redirect-http_build_query_selectively_fields" value="<?php if(isset($http_build_query_selectively_fields) && !empty($http_build_query_selectively_fields)){ echo $http_build_query_selectively_fields; } ?>" >
 				</span>	
 			</div>

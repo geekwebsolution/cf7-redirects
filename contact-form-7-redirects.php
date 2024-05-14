@@ -1,13 +1,12 @@
 <?php
 /*
-    Plugin Name: Contact Form 7 Redirects
-    Description:  Contact Form 7 Redirection after mail sent.
-    Author: Geek Code Lab
-    Version: 1.8
-    Author URI: https://geekcodelab.com/
-    Text Domain: contact-form-7-redirects
+Plugin Name: Contact Form 7 Redirects
+Description:  Contact Form 7 Redirection after mail sent.
+Author: Geek Code Lab
+Version: 1.8.1
+Author URI: https://geekcodelab.com/
+Text Domain: contact-form-7-redirects
 */
-
 // do not allow direct access
 if(isset($_SERVER['SCRIPT_NAME'])) {
     if (strpos(strtolower($_SERVER['SCRIPT_NAME']), strtolower(basename(__FILE__)))) {
@@ -20,7 +19,7 @@ if(isset($_SERVER['SCRIPT_NAME'])) {
  * Global vars
  */
 
-define('CF7RGK_BUILD', '1.8');  // Used to force load of latest .js files
+define('CF7RGK_BUILD', '1.8.1');  // Used to force load of latest .js files
 define('CF7RGK_FILE', __FILE__); // For use in other files
 define('CF7RGK_PATH', plugin_dir_path(__FILE__));
 define('CF7RGK_URL', plugin_dir_url(__FILE__));
