@@ -67,3 +67,15 @@
 .cf7rgk-fildes.cf7rgk-radio {
     margin-top: 10px;
 }
+
+#cf7rgk-redirect-pane .cf7rgk-tags {
+    margin: 5px 0 8px 0;
+}
+
+#cf7rgk-redirect-pane span.mailtag {
+  display: inline-block;
+  margin: 0 0 0 4px;
+  padding: 1px 2px;
+  cursor: pointer;
+  color: #000000f2;
+}

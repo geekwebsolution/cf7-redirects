@@ -62,19 +62,22 @@ class CF7RGK_util {
 
 		document.addEventListener( 'wpcf7mailsent', function( event ) {
 			var cf7rgk_json = getCookie("cf7rgk_options");
-    		var cf7rgk_opt = JSON.parse(cf7rgk_json);
 
-			if (cf7rgk_opt != '') {
-				if(cf7rgk_opt.url != '') {
-					if (cf7rgk_opt.open_new == "on") {
-						window.open(cf7rgk_opt.url, '_blank');
-					} else {
-						window.open(cf7rgk_opt.url, '_self');
+			if(typeof cf7rgk_json != 'undefined') {
+				var cf7rgk_opt = JSON.parse(decodeURIComponent(cf7rgk_json));
+
+				if (cf7rgk_opt != '') {
+					if(cf7rgk_opt.url != '') {
+						if (cf7rgk_opt.open_new == "on") {
+							window.open(cf7rgk_opt.url, '_blank');
+						} else {
+							window.open(cf7rgk_opt.url, '_self');
+						}
 					}
 				}
-			}
 
-			eraseCookie("cf7rgk_options");
+				eraseCookie("cf7rgk_options");
+			}
 		});
 
 		</script>
@@ -104,10 +107,14 @@ class CF7RGK_util {
 		$new_fields = array();
 		if(!$specific_fields)	$specific_fields = array();
 
+
+
 		$ContactForm = WPCF7_ContactForm::get_instance($form_id);
 		$form_fields = $ContactForm->scan_form_tags();
 		
+		
 		if(isset($inputs) && !empty($inputs)){
+			$specific_fields = array_map(function($value) { return str_replace( ["[","]"] , '', trim($value)); }, $specific_fields);
 			foreach ($inputs as $key => $value) {				
 				if(isset($specific_fields) && !empty($specific_fields)) {
 					if(!in_array($key,$specific_fields)) {
