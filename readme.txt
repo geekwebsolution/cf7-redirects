@@ -6,6 +6,7 @@ Requires PHP: 7.4
 Requires at least: 6.0
 Tested up to: 6.5
 Stable tag: 1.8.1
+License: GPLv2 or later
 
 This Plugin provide you redirect option after Contact form 7 sent successfully.
 
@@ -21,17 +22,12 @@ Simply go to your form settings, choose the "Redirect Settings" tab and set the 
 
 **Plugin Features** 
 
-*Redirect to Specific Page
-
-*Redirect to Specific Post
-
-*Redirect to Specific Custom url
-
-*Redirect url open in new tab
-
-*Pass form parameter with redirect url
-
-*Option to add custom JavaScript
+🔹 Redirect to Specific Page
+🔹 Redirect to Specific Post
+🔹 Redirect to Specific Custom url
+🔹 Redirect url open in new tab
+🔹 Pass form parameter with redirect url
+🔹 Option to add custom JavaScript
 
 
 == Installation ==
