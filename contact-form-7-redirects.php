@@ -8,6 +8,22 @@ Author URI: https://geekcodelab.com/
 Text Domain: contact-form-7-redirects
 */
 // do not allow direct access
+
+if (!defined("CF7RGK_PLUGIN_DIR_PATH"))
+	define("CF7RGK_PLUGIN_DIR_PATH", plugin_dir_path(__FILE__));
+
+if (!defined("CF7RGK_PLUGIN_URL"))
+	define("CF7RGK_PLUGIN_URL", plugins_url() . '/' . basename(dirname(__FILE__)));
+
+if (!defined("CF7RGK_PLUGIN_DIR"))
+	define("CF7RGK_PLUGIN_DIR", plugin_basename(__DIR__));
+
+if (!defined("CF7RGK_PLUGIN_BASENAME"))
+	define("CF7RGK_PLUGIN_BASENAME", plugin_basename(__FILE__));
+
+
+require (CF7RGK_PLUGIN_DIR_PATH .'updater/updater.php');
+
 if(isset($_SERVER['SCRIPT_NAME'])) {
     if (strpos(strtolower($_SERVER['SCRIPT_NAME']), strtolower(basename(__FILE__)))) {
         header('HTTP/1.0 403 Forbidden');
@@ -59,6 +75,7 @@ if ( is_admin() ) {
 }
 require_once CF7RGK_PATH . 'library/class-util.php';
 
+add_action('upgrader_process_complete', 'cf7rgk_updater_activate'); // remove  transient  on plugin  update
 
 /**
  * Initialize plugin links
@@ -70,9 +87,9 @@ $plugin = plugin_basename(__FILE__);
 add_filter( "plugin_action_links_$plugin", 'cf7rgk_add_plugin_settings_link');
 function cf7rgk_add_plugin_settings_link( $links ) {
 	if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
-		$support_link = '<a href="https://geekcodelab.com/contact/" style="color:#46b450;font-weight: 600;" target="_blank" >' . __( 'Support', 'contact-form-7-redirects' ) . '</a>'; 
+		$support_link = '<a href="https://geekcodelab.com/contact/" style="color:#46b450;font-weight: 600;" target="_blank" >' . __( 'Support', 'contact-form-7-redirects' ) . '</a>';
 		array_unshift( $links, $support_link );
-	
+
 	    	$setting_link = '<a href="'. admin_url('admin.php?page=wpcf7') .'">' . __( 'Settings', 'contact-form-7-redirects' ) . '</a>';
 		array_unshift( $links, $setting_link );
 	}
