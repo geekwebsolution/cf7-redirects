@@ -19,9 +19,6 @@ function cf7rgk_updater_utility() {
     return $settings;
 }
 
-register_activation_hook( __FILE__ , 'cf7rgk_updater_activate' );
-add_action('upgrader_process_complete', 'cf7rgk_updater_activate');
-
 function cf7rgk_updater_activate() {
 
     // Refresh transients

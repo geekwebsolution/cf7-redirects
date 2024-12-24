@@ -31,6 +31,10 @@ if (!defined("CF7RGK_PLUGIN_BASENAME"))
     define("CF7RGK_PLUGIN_BASENAME", plugin_basename(__FILE__));
 
 require(CF7RGK_PATH . 'updater/updater.php');
+
+register_activation_hook(__FILE__, 'cf7rgk_updater_activate');
+add_action('upgrader_process_complete', 'cf7rgk_updater_activate');
+
 /**
  * Admin notice
  */
