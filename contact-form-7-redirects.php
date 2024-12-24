@@ -3,12 +3,12 @@
 Plugin Name: Contact Form 7 Redirects
 Description:  Contact Form 7 Redirection after mail sent.
 Author: Geek Code Lab
-Version: 1.8.1
+Version: 1.9.0
 Author URI: https://geekcodelab.com/
 Text Domain: contact-form-7-redirects
 */
 // do not allow direct access
-if(isset($_SERVER['SCRIPT_NAME'])) {
+if (isset($_SERVER['SCRIPT_NAME'])) {
     if (strpos(strtolower($_SERVER['SCRIPT_NAME']), strtolower(basename(__FILE__)))) {
         header('HTTP/1.0 403 Forbidden');
         exit('Forbidden');
@@ -19,34 +19,41 @@ if(isset($_SERVER['SCRIPT_NAME'])) {
  * Global vars
  */
 
-define('CF7RGK_BUILD', '1.8.1');  // Used to force load of latest .js files
+define('CF7RGK_BUILD', '1.9.0');  // Used to force load of latest .js files
 define('CF7RGK_FILE', __FILE__); // For use in other files
 define('CF7RGK_PATH', plugin_dir_path(__FILE__));
 define('CF7RGK_URL', plugin_dir_url(__FILE__));
 
+if (!defined("CF7RGK_PLUGIN_DIR"))
+    define("CF7RGK_PLUGIN_DIR", plugin_basename(__DIR__));
+
+if (!defined("CF7RGK_PLUGIN_BASENAME"))
+    define("CF7RGK_PLUGIN_BASENAME", plugin_basename(__FILE__));
+
+require(CF7RGK_PATH . 'updater/updater.php');
 /**
  * Admin notice
  */
-add_action( 'admin_init', 'cf7rgk_plugin_load' );
+add_action('admin_init', 'cf7rgk_plugin_load');
 
-function cf7rgk_plugin_load(){
-	if ( ! ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) ) {
-		add_action( 'admin_notices', 'cf7rgk_install_contact_form_7_admin_notice' );
-		deactivate_plugins("cf7-redirects/contact-form-7-redirects.php");
-		return;
-	}
+function cf7rgk_plugin_load() {
+    if (! (is_plugin_active('contact-form-7/wp-contact-form-7.php'))) {
+        add_action('admin_notices', 'cf7rgk_install_contact_form_7_admin_notice');
+        deactivate_plugins("cf7-redirects/contact-form-7-redirects.php");
+        return;
+    }
 }
 
-function cf7rgk_install_contact_form_7_admin_notice(){ ?>
-	<div class="error">
-		<p>
-			<?php
-			// translators: %s is the plugin name.
-			echo esc_html( sprintf( __( '%s is enabled but not effective. It requires Contact Form 7 in order to work.', 'Contact Form 7 Redirects' ), 'contact-form-7-redirects' ) );
-			?>
-		</p>
-	</div>
-	<?php
+function cf7rgk_install_contact_form_7_admin_notice() { ?>
+    <div class="error">
+        <p>
+            <?php
+            // translators: %s is the plugin name.
+            echo esc_html(sprintf(__('%s is enabled but not effective. It requires Contact Form 7 in order to work.', 'Contact Form 7 Redirects'), 'contact-form-7-redirects'));
+            ?>
+        </p>
+    </div>
+<?php
 }
 
 
@@ -54,7 +61,7 @@ function cf7rgk_install_contact_form_7_admin_notice(){ ?>
  * Includes files
  */
 
-if ( is_admin() ) {
+if (is_admin()) {
     require_once CF7RGK_PATH . 'library/class-admin.php';
 }
 require_once CF7RGK_PATH . 'library/class-util.php';
@@ -63,20 +70,20 @@ require_once CF7RGK_PATH . 'library/class-util.php';
 /**
  * Initialize plugin links
  */
-$plugin = plugin_basename( __FILE__ );
+$plugin = plugin_basename(__FILE__);
 CF7RGK_util::CF7RGK_setup();
 
 $plugin = plugin_basename(__FILE__);
-add_filter( "plugin_action_links_$plugin", 'cf7rgk_add_plugin_settings_link');
-function cf7rgk_add_plugin_settings_link( $links ) {
-	if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
-		$support_link = '<a href="https://geekcodelab.com/contact/" style="color:#46b450;font-weight: 600;" target="_blank" >' . __( 'Support', 'contact-form-7-redirects' ) . '</a>'; 
-		array_unshift( $links, $support_link );
-	
-	    	$setting_link = '<a href="'. admin_url('admin.php?page=wpcf7') .'">' . __( 'Settings', 'contact-form-7-redirects' ) . '</a>';
-		array_unshift( $links, $setting_link );
-	}
-	return $links;
+add_filter("plugin_action_links_$plugin", 'cf7rgk_add_plugin_settings_link');
+function cf7rgk_add_plugin_settings_link($links) {
+    if (is_plugin_active('contact-form-7/wp-contact-form-7.php')) {
+        $support_link = '<a href="https://geekcodelab.com/contact/" style="color:#46b450;font-weight: 600;" target="_blank" >' . __('Support', 'contact-form-7-redirects') . '</a>';
+        array_unshift($links, $support_link);
+
+        $setting_link = '<a href="' . admin_url('admin.php?page=wpcf7') . '">' . __('Settings', 'contact-form-7-redirects') . '</a>';
+        array_unshift($links, $setting_link);
+    }
+    return $links;
 }
 
 /**
@@ -86,8 +93,7 @@ add_action('wp_ajax_cf7rgk_redirect_page_ajax', 'cf7rgk_redirect_page_ajax_callb
 add_action('wp_ajax_nopriv_cf7rgk_redirect_page_ajax', 'cf7rgk_redirect_page_ajax_callback');
 
 // AJAX callback function
-function cf7rgk_redirect_page_ajax_callback()
-{
+function cf7rgk_redirect_page_ajax_callback() {
     $result = array();
     $search = $_POST['search'];
 
@@ -130,8 +136,7 @@ add_action('wp_ajax_cf7rgk_redirect_post_ajax', 'cf7rgk_redirect_post_ajax_callb
 add_action('wp_ajax_nopriv_cf7rgk_redirect_post_ajax', 'cf7rgk_redirect_post_ajax_callback');
 
 // AJAX callback function
-function cf7rgk_redirect_post_ajax_callback()
-{
+function cf7rgk_redirect_post_ajax_callback() {
     $result = array();
     $search = $_POST['search'];
 
