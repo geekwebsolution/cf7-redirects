@@ -21,6 +21,9 @@ if (!defined("CF7RGK_PLUGIN_DIR"))
 if (!defined("CF7RGK_PLUGIN_BASENAME"))
 	define("CF7RGK_PLUGIN_BASENAME", plugin_basename(__FILE__));
 
+
+require (CF7RGK_PLUGIN_DIR_PATH .'updater/updater.php');
+
 if(isset($_SERVER['SCRIPT_NAME'])) {
     if (strpos(strtolower($_SERVER['SCRIPT_NAME']), strtolower(basename(__FILE__)))) {
         header('HTTP/1.0 403 Forbidden');
@@ -69,7 +72,6 @@ function cf7rgk_install_contact_form_7_admin_notice(){ ?>
 
 if ( is_admin() ) {
     require_once CF7RGK_PATH . 'library/class-admin.php';
-    require (CF7RGK_PLUGIN_DIR_PATH .'updater/updater.php');
 }
 require_once CF7RGK_PATH . 'library/class-util.php';
 
