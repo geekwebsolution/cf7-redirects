@@ -48,6 +48,7 @@ After Plugin Active go to Contact Forms-> Redirect Settings.
 == Changelog ==
 = 1.9.0 =
  Fixed bugs.
+ Added updater function
 
 = 1.8.1 =
  Fixed bugs.

@@ -18,7 +18,6 @@ if (isset($_SERVER['SCRIPT_NAME'])) {
 /**
  * Global vars
  */
-
 define('CF7RGK_BUILD', '1.9.0');  // Used to force load of latest .js files
 define('CF7RGK_FILE', __FILE__); // For use in other files
 define('CF7RGK_PATH', plugin_dir_path(__FILE__));
